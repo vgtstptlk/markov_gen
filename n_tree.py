@@ -12,7 +12,7 @@ class Tree:
     def append_el(self, el, tag=None):
         cur = self.nodes
         while cur.pointer:
-            if (not cur.tag) and (cur.tag == tag):
+            if cur.tag and (cur.tag == tag):
                 cur.value.append(el)
                 return
             cur = cur.pointer
@@ -31,9 +31,9 @@ class Tree:
         cur = self.nodes
         result = ""
         while cur.pointer:
-            result += str(cur.value) + " "
+            result += str(cur.tag) + ": " + str(cur.value) + "\n"
             cur = cur.pointer
-        return result + str(cur.value)
+        return result + str(cur.tag) + ": " + str(cur.value)
 
 
 
