@@ -27,29 +27,27 @@ def normalize(file_name):
     return result
 
 
+def save_long_file(text, sample, file_name="examples.txt"):
+    f = open(file_name, 'a')
+    f.write('-----------'+sample+'-------------\n')
+    f.write(text+'\n')
+    f.write('------------end----------------\n')
+    f.close()
+
+
 def save_text(text, file_name="output_text.txt"):
     f = open(file_name, 'w')
     f.write(text)
+    f.close()
 
 
 def test_markov(size=100, file_name="sample1.txt"):
     mark = markov.train_model(normalize(os.getcwd() + "\\samples\\" + file_name))
     text = markov.generate_sentence(size, mark)
     save_text(text)
+    save_long_file(text, file_name)
     print(text)
 
 
-def own_markov():
-    mark = mrk()
-    mark.train_from_text("Раз есть две такие взаимоисключающие области, значит есть и граница между ними "
-                             "(она называется горизонтом событий). Свет оказавшийся на этой границе и движущийся "
-                             "в правильном направлении, может выйти на орбиту вокруг черной дыры. "
-                             "То есть он не будет «засасываться» черной дырой, и тем не менее уже "
-                             "не сможет удалиться от неё, а вместо этого"
-                             " будет вечно вращаться по орбите вокруг черной дыры."
-                             " Это и будет пограничным состоянием между пролететь мимо и быть поглощенным.")
-    mark.generate_text()
-
-
 test_tree()
-test_markov()
+test_markov(100, "sample7.txt")

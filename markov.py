@@ -43,7 +43,7 @@ def train_model(data):
     data = data.split()
     for i in range(0, len(data)-1):
         if data[i] in markov_model:
-            print(data)
+            # print(data)
             markov_model[data[i]].update([data[i+1]])
         else:
             markov_model[data[i]] = MarkDict([data[i + 1]])
@@ -51,11 +51,6 @@ def train_model(data):
 
 
 def generate_start(model):
-    if 'END' in model:
-        wrd = 'END'
-        while wrd == 'END':
-            wrd = model['END'].return_weighted_random_word()
-        return wrd
     return random.choice(list(model.keys()))
 
 
