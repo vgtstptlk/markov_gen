@@ -49,5 +49,13 @@ def test_markov(size=100, file_name="sample1.txt"):
     print(text)
 
 
+def test_markov_with_higher_level(size=100, file_name="sample1.txt", level=2):
+    mark = markov.train_model_higher(level, normalize(os.getcwd() + "\\samples\\" + file_name))
+    text = markov.generate_sentence(size, mark)
+    save_text(text)
+    save_long_file(text, file_name)
+    print(text)
+
 test_tree()
-test_markov(100, "sample7.txt")
+test_markov(50, "intro.txt")
+# test_markov_with_higher_level(100, "sample.txt")

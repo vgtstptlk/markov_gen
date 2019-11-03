@@ -13,11 +13,14 @@ class Tree:
         cur = self.nodes
         while cur.pointer:
             if cur.tag and (cur.tag == tag):
-                cur.value.append(el)
+                for item in el:
+                    cur.value.append(el)
+
                 return
             cur = cur.pointer
         if cur.tag and (cur.tag == tag):
-            cur.value.append(el)
+            for item in el:
+                cur.value.append(el)
             return
         cur.pointer = Node(el, None, tag)
 
