@@ -1,4 +1,4 @@
-from n_tree import Tree
+
 import markov
 import os
 import random
@@ -25,12 +25,14 @@ random_gen = {
 
 }
 
+
 def normalize(file_name):
     f = open(file_name, 'r')
     result = f.read()
     result = result.replace('\n', '')
     while result.find('  ') != -1:
-        result.replace('  ', ' ')
+        result = result.replace('  ', ' ')
+
 
     return result
 
@@ -61,3 +63,4 @@ gen_markov(main_part, 30, "sample7.txt")
 
 text = gen("S", random_gen)
 save_long_file(text, "Грамматики")
+save_text(text)
