@@ -29,11 +29,9 @@ random_gen = {
 def normalize(file_name):
     f = open(file_name, 'r')
     result = f.read()
-    result = result.replace('\n', '')
+    result = result.replace('\n', '').replace(';', ',').replace('"', '')
     while result.find('  ') != -1:
         result = result.replace('  ', ' ')
-
-
     return result
 
 
@@ -59,8 +57,8 @@ def gen_markov(lst, size=100, file_name="sample1.txt"):
 
 
 gen_markov(intro, 10, "intro.txt")
-gen_markov(main_part, 30, "sample7.txt")
+gen_markov(main_part, 30, "sample2.txt")
 
-text = gen("S", random_gen)
+text = gen("S", random_gen).replace('.,', '.').replace('.-', '-').replace('..', '.').replace(',.', '.')
 save_long_file(text, "Грамматики")
 save_text(text)
