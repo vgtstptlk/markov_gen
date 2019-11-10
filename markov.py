@@ -31,14 +31,20 @@ def generate_sentence(length, markov_model):
     return ' '.join(sentence) + '.'
 
 
-# def train_model_higher(level, data):
-#     data = data.split()
-#     markov_model = dict()
-#     for i in range(0, len(data)-level):
-#         wind = tuple(data[i: i+level])
-#         if wind in markov_model:
-#             markov_model[wind].update([data[i+level]])
-#         else:
-#             markov_model[wind] = MarkDict([data[i+level]])
-#     print(markov_model)
-#     return markov_model
+
+def train_model_higher(data):
+    data = data.split(' ')
+    markov_model = dict()
+    k = 1
+    for i in range(0, len(data)//2 -1):
+        data[i] = data[k] + ' ' + data[k+1]
+        k += 2
+
+    for i in range(0, len(data)-1):
+        if data[i] in markov_model:
+
+            markov_model[data[i]].update([data[i+1]])
+        else:
+            markov_model[data[i]] = MarkDict([data[i+1]])
+
+    return markov_model

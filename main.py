@@ -20,9 +20,15 @@ def gen(rule, g):
 
 random_gen = {
     "S": [intro, "E"],
-    "E": ("S", main_part, "M"),
-    "M": (main_part, "S", "")
+    "E": (main_part, "M"),
+    "M": (main_part, "")
 
+}
+
+
+normal_gen = {
+    "S": [intro, main_part, "E"],
+    "E": (main_part, "")
 }
 
 
@@ -32,6 +38,7 @@ def normalize(file_name):
     result = result.replace('\n', '').replace(';', ',').replace('"', '')
     while result.find('  ') != -1:
         result = result.replace('  ', ' ')
+    f.close()
     return result
 
 
@@ -56,9 +63,16 @@ def gen_markov(lst, size=100, file_name="sample1.txt"):
     return lst
 
 
-gen_markov(intro, 10, "intro.txt")
-gen_markov(main_part, 30, "sample2.txt")
+def gen_markov_higher(lst, size=100, file_name="sample1.txt"):
+    mark = markov.train_model_higher(normalize(os.getcwd() + "\\samples\\" + file_name))
+    for i in range(10):
+        lst.append(markov.generate_sentence(size, mark))
+    return lst
 
-text = gen("S", random_gen).replace('.,', '.').replace('.-', '-').replace('..', '.').replace(',.', '.')
+
+gen_markov_higher(intro, 10, "intro.txt")
+gen_markov_higher(main_part, 10, "sample5_LEARN.txt")
+
+text = gen("S", normal_gen).replace('.,', ',').replace('.-', '-').replace('..', '.').replace(',.', '.')
 save_long_file(text, "Грамматики")
 save_text(text)
