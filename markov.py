@@ -31,7 +31,6 @@ def generate_sentence(length, markov_model):
     return ' '.join(sentence) + '.'
 
 
-
 def train_model_higher(data):
     data = data.split(' ')
     markov_model = dict()
@@ -46,5 +45,4 @@ def train_model_higher(data):
             markov_model[data[i]].update([data[i+1]])
         else:
             markov_model[data[i]] = MarkDict([data[i+1]])
-
     return markov_model
