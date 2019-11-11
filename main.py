@@ -1,5 +1,14 @@
+"""
+Для генерации текста нужно запустить main.py. Для генераци текста без грамматик запустите test_struct.py.
+Каждый новый текст будет сгенерирован в output.txt.
+Посмотреть историю можно в examples.txt.
+Лучшие тексты (по мнению автора) записаны в best.txt или в паблике марковской цепи, где она выкладывает мысли не только
+о физике, но и по философии. Иногда даже пишет новые главы романа "Преступление и наказание".
+https://vk.com/markov_thoughts
+"""
 
-import markov
+
+from markov import Markov
 import os
 import random
 
@@ -56,23 +65,26 @@ def save_text(text, file_name="output_text.txt"):
     f.close()
 
 
+# Для более веселых текстов создаем несколько примеров
 def gen_markov(lst, size=100, file_name="sample1.txt"):
+    markov = Markov()
     mark = markov.train_model(normalize(os.getcwd() + "\\samples\\" + file_name))
-    for i in range(30):
+    for i in range(5):
         lst.append(markov.generate_sentence(size, mark))
     return lst
 
 
 def gen_markov_higher(lst, size=100, file_name="sample1.txt"):
+    markov = Markov()
     mark = markov.train_model_higher(normalize(os.getcwd() + "\\samples\\" + file_name))
-    for i in range(10):
+    for i in range(30):
         lst.append(markov.generate_sentence(size, mark))
     return lst
 
 
-gen_markov_higher(intro, 10, "intro.txt")
+gen_markov(intro, 10, "intro.txt")
 gen_markov_higher(main_part, 10, "sample5_LEARN.txt")
 
-text = gen("S", normal_gen).replace('.,', ',').replace('.-', '-').replace('..', '.').replace(',.', '.')
+text = gen("S", normal_gen).replace(':.', '.').replace('.,', ',').replace('.-', '-').replace('..', '.').replace(',.', '.')
 save_long_file(text, "Грамматики")
 save_text(text)

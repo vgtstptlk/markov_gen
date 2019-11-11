@@ -2,7 +2,7 @@
 # every struct will be checked here
 
 #from n_tree import Tree
-import markov
+from markov import Markov
 import os
 #from own_markov import markov as mrk
 
@@ -42,6 +42,7 @@ def save_text(text, file_name="output_text.txt"):
 
 
 def test_markov(size=100, file_name="sample1.txt"):
+    markov = Markov()
     mark = markov.train_model(normalize(os.getcwd() + "\\samples\\" + file_name))
     text = markov.generate_sentence(size, mark)
     save_text(text)
@@ -50,6 +51,7 @@ def test_markov(size=100, file_name="sample1.txt"):
 
 
 def test_markov_with_higher_level(size=100, file_name="sample1.txt"):
+    markov = Markov()
     mark = markov.train_model_higher(normalize(os.getcwd() + "\\samples\\" + file_name))
     text = markov.generate_sentence(size, mark)
     save_text(text)
