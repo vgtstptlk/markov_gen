@@ -12,33 +12,9 @@ from markov import Markov
 import os
 import random
 
+
 intro = []
 main_part = []
-
-
-def gen(rule, g):
-    if isinstance(rule, tuple):
-        return gen(random.choice(rule), g)
-    elif isinstance(rule, list):
-        return "".join([gen(x, g) for x in rule])
-    elif rule in g:
-        return gen(g[rule], g)
-    else:
-        return str(rule + " ")
-
-
-random_gen = {
-    "S": [intro, "E"],
-    "E": (main_part, "M"),
-    "M": (main_part, "")
-
-}
-
-
-normal_gen = {
-    "S": [intro, main_part, "E"],
-    "E": (main_part, "")
-}
 
 
 def normalize(file_name):
@@ -83,8 +59,8 @@ def gen_markov_higher(lst, size=100, file_name="sample1.txt"):
 
 
 gen_markov(intro, 10, "intro.txt")
-gen_markov_higher(main_part, 10, "sample5_LEARN.txt")
-
-text = gen("S", normal_gen).replace(':.', '.').replace('.,', ',').replace('.-', '-').replace('..', '.').replace(',.', '.')
+gen_markov_higher(main_part, 100, "sample5_LEARN.txt")
+random.choice(intro)+random.choice(main_part)
+text = (random.choice(intro)+random.choice(main_part)).replace(':.', '.').replace('.,', ',').replace('.-', '-').replace('..', '.').replace(',.', '.')
 save_long_file(text, "Грамматики")
 save_text(text)
