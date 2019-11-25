@@ -20,7 +20,7 @@ def test_tree():
 def normalize(file_name):
     f = open(file_name, 'r')
     result = f.read()
-    result = result.replace('\n', '')
+    #result = result.replace('\n', '')
     while result.find('  ') != -1:
         result.replace('  ', ' ')
 
@@ -62,4 +62,19 @@ def test_markov_with_higher_level(size=100, file_name="sample1.txt"):
 #test_markov(50, "intro.txt")
 
 
-test_markov_with_higher_level(100, "sample5_LEARN.txt")
+
+
+import nltk
+
+file = open('C:\\Users\\mag13\\Desktop\\ЛАБЫ\\CиАОД\\Курсовая\\markov_gen\\samples\\sample6.txt', 'rt')
+sent = nltk.sent_tokenize(file.read())
+file.close()
+print(sent[0][:-1])
+string = ""
+for s in sent:
+    string += s[:-1] + " . "
+save_text(string, 'sample6_normalized.txt')
+
+print("heelo . dsdd . ".split(" "))
+
+test_markov_with_higher_level(100, "sample6_normalized.txt")

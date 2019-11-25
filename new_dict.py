@@ -24,10 +24,6 @@ class MarkDict(dict):
             return self[item]
         return 0
 
-    def return_random_word(self):
-        random_key = random.sample(self, 1)
-        return random_key[0]
-
     def return_weighted_random_word(self):
         random_int = random.randint(0, self.tokens-1)
         index = 0

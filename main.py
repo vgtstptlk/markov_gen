@@ -59,8 +59,8 @@ def gen_markov_higher(lst, size=100, file_name="sample1.txt"):
 
 
 gen_markov(intro, 10, "intro.txt")
-gen_markov_higher(main_part, 100, "sample5_LEARN.txt")
-random.choice(intro)+random.choice(main_part)
-text = (random.choice(intro)+random.choice(main_part)).replace(':.', '.').replace('.,', ',').replace('.-', '-').replace('..', '.').replace(',.', '.')
+gen_markov_higher(main_part, 100, "sample5_normalized.txt")
+
+text = (random.choice(intro)+random.choice(main_part)).replace(':.', '.').replace('.,', ',').replace('.-', '-').replace('..', '.').replace(',.', '.').replace(' . ', '.')
 save_long_file(text, "Грамматики")
 save_text(text)

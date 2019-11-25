@@ -6,7 +6,7 @@ from new_dict import MarkDict
 class Markov:
     # Создаем простую модель с окном в 1 слово. Используется для вводной части
     def train_model(self, data):
-        markov_model = dict()
+        markov_model = MarkDict()
         data = data.split()
         for i in range(0, len(data)-1):
             if data[i] in markov_model:
@@ -17,6 +17,11 @@ class Markov:
         return markov_model
 
     def generate_start(self, model):
+
+        if '.' in model.keys():
+            print(0)
+            return model['.'].return_weighted_random_word()
+        print(1)
         return random.choice(list(model.keys()))
 
     # Здесь мы находим первое слово, а дальше по принципу марковской цепи находим последующие
@@ -39,7 +44,7 @@ class Markov:
         markov_model = dict()
         k = 1
 
-        for i in range(0, len(data)//2 -1):
+        for i in range(0, len(data)//2-1):
             data[i] = data[k] + ' ' + data[k+1]
             k += 2
 
