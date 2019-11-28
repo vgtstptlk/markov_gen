@@ -10,18 +10,14 @@ class Markov:
         data = data.split()
         for i in range(0, len(data)-1):
             if data[i] in markov_model:
-
                 markov_model[data[i]].update([data[i+1]])
             else:
                 markov_model[data[i]] = MarkDict([data[i + 1]])
         return markov_model
 
     def generate_start(self, model):
-
         if '.' in model.keys():
-            print(0)
             return model['.'].return_weighted_random_word()
-        print(1)
         return random.choice(list(model.keys()))
 
     # Здесь мы находим первое слово, а дальше по принципу марковской цепи находим последующие
